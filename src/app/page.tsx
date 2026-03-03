@@ -10,10 +10,8 @@ import { NovaAvatar } from "@/components/nova/nova-avatar";
 import { ChatMessage } from "@/components/nova/chat-message";
 import { ChatInput } from "@/components/nova/chat-input";
 import { LoginDialog } from "@/components/nova/login-dialog";
-import { PricingDialog } from "@/components/nova/pricing-dialog";
 import { AISelector } from "@/components/nova/ai-selector";
 import { GroupSelector } from "@/components/nova/group-selector";
-import { PaymentReturnHandler } from "@/components/nova/payment-return-handler";
 
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -29,7 +27,6 @@ import {
   Settings,
   History,
   User,
-  CreditCard,
   Crown,
   Sparkles,
   Users,
@@ -39,6 +36,7 @@ import {
   Plus,
   X,
   UserCircle,
+  Zap,
 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -384,15 +382,6 @@ export default function NovaAI() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setShowPricing(true)}
-            className="h-9 w-9"
-          >
-            <CreditCard className="w-5 h-5" />
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
             onClick={() => setShowLogin(true)}
             className="h-9 w-9"
           >
@@ -500,14 +489,6 @@ export default function NovaAI() {
             ) : (
               <VolumeX className="w-5 h-5 text-muted-foreground" />
             )}
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setShowPricing(true)}
-          >
-            <CreditCard className="w-5 h-5" />
           </Button>
 
           <Sheet>
@@ -755,6 +736,15 @@ export default function NovaAI() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background via-background to-violet-950/20">
+      {/* Beta Banner */}
+      <div className="bg-gradient-to-r from-violet-600 to-purple-600 text-white py-2 px-4 text-center text-sm font-medium">
+        <span className="flex items-center justify-center gap-2">
+          <Zap className="w-4 h-4 animate-pulse" />
+          <span>Beta Testing — All Features FREE for Now!</span>
+          <span className="hidden sm:inline">• Sign in to save your chat history</span>
+        </span>
+      </div>
+
       {isMobile ? <MobileHeader /> : <DesktopHeader />}
 
       <main className="flex-1 flex">
@@ -937,10 +927,8 @@ export default function NovaAI() {
 
       {/* Modals */}
       <LoginDialog />
-      <PricingDialog />
       <AISelector />
       <GroupSelector />
-      <PaymentReturnHandler />
     </div>
   );
 }

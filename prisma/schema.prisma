@@ -17,6 +17,7 @@ model User {
   password      String
   image         String?
   role          String        @default("user") // "user" or "admin"
+  emailVerified Boolean       @default(false)
   subscription  Subscription?
   chats         Chat[]
   createdAt     DateTime      @default(now())
@@ -55,5 +56,15 @@ model Message {
   role      String   // "user" or "assistant"
   content   String
   voiceUrl  String?
+  createdAt DateTime @default(now())
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  type      String   // "email_verification" or "password_reset"
+  expiresAt DateTime
+  used      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
